@@ -1,4 +1,5 @@
 require "rails_helper"
+require 'debug'
 
 RSpec.describe "Posts", type: :request do
 
@@ -13,14 +14,17 @@ RSpec.describe "Posts", type: :request do
   end
 
   describe "with data in the DB" do
-    get '/posts'
     let!(:posts) { create_list(:post, 10, published: true) }
 
     it "should return all the published posts" do
-      
+      get '/posts' 
       payload = JSON.parse(response.body)
+      #binding.break 
+      #puts payload
       expect(payload.size).to eq(posts.size)
       expect(response).to have_http_status(200)
+      #payload = 3
+      #expect(payload).to eq(3)
     end
   end
 
@@ -35,4 +39,5 @@ RSpec.describe "Posts", type: :request do
       expect(response).to have_http_status(200)
     end
   end
+
 end
