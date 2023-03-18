@@ -22,7 +22,8 @@ RSpec.describe "Posts", type: :request do
         payload = JSON.parse(response.body)
         expect(payload).to_not be_empty
         expect(payload.size).to eq(2)
-        expect(payload.map{|p| p["id"]}.sort).to eq([holamundo.id, hola_rails.id].sort)
+        #binding.break 
+        expect(payload.map{|p| p["id"]}.sort).to eq([hola_mundo[0].id, hola_rails[0].id].sort)
         expect(response).to have_http_status(200)
       end
     end
