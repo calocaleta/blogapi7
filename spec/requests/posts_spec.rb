@@ -36,6 +36,12 @@ RSpec.describe "Posts", type: :request do
       payload = JSON.parse(response.body)
       expect(payload).to_not be_empty
       expect(payload["id"]).to eq(post.id)
+      expect(payload["title"]).to eq(post.title)
+      expect(payload["content"]).to eq(post.content)
+      expect(payload["published"]).to eq(post.published)
+      expect(payload["user"]["name"]).to eq(post.user.name)
+      expect(payload["user"]["email"]).to eq(post.user.email)
+      expect(payload["user"]["id"]).to eq(post.user.id)
       expect(response).to have_http_status(200)
     end
   end
